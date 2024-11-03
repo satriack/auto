@@ -1,0 +1,23 @@
+{
+  "name": "auto",
+  "version": "1.0.0",
+  "description": "my automation k6 run --env ENV=prod register.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satriack/auto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/satriack/auto/issues"
+  },
+  "homepage": "https://github.com/satriack/auto#readme"
+}
