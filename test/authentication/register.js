@@ -16,7 +16,6 @@ export default function () {
     }
     const url = endpoints.user.register
     const responseRegisterContactList = http.post(url, JSON.stringify(body), params)
-    console.log(responseRegisterContactList.json())
 }
 
 //k6 run --env ENVIRONMENT=staging register.js
