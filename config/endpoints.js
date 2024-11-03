@@ -13,6 +13,6 @@ const env = {
     }
 }
 
-const environment = __ENV.ENVIRONMENT || 'staging';
+const environment = __ENV.ENV || 'staging';
 
 export const endpoints = env[environment];
