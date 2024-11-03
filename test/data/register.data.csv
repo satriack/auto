@@ -1,0 +1,9 @@
+no,firstName,lastName,email,password,caseType,message
+1,justin,hubner,-sombre@mail.com,123123123,positive,
+2,ibra,himovic,-crowd@mail.com,1,negative,User validation failed: password: Path `password` (`1`) is shorter than the minimum allowed length (7).
+3,,himovic,-crowd@mail.com,123123123,negative,User validation failed: firstName: Path `firstName` is required.
+4,ibra,,-crowd@mail.com,123123123,negative,User validation failed: lastName: Path `lastName` is required.
+5,ibra,himovic,-crowd.com,123123123,negative,User validation failed: email: Email is invalid
+6,ibra,himovic,,123123123,negative,User validation failed: email: Email is invalid
+7,ibra,himovic,-crowd@mail.com,,negative,User validation failed: password: Path `password` is required.
+8,val,verde,val@v.com,123123123,negative,Email address is already in use
