@@ -1,0 +1,39 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.17.0'  # Match with local version
+
+      - name: Install dependencies
+        run: npm install
+
+      #- name: Run tests
+      #  run: npm run test
+
+      - name: Run K6 tests
+        run: |
+          # install k6
+          sudo apt-get update
+          sudo apt-get install -y gnupg software-properties-common
+          wget -q https://dl.k6.io/key.gpg -O- | sudo apt-key add -
+          echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install k6
+          # Run script K6
+          k6 run --env ENV=prod test/regression/authentication/register.js
