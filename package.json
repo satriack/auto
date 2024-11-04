@@ -1,7 +1,7 @@
 {
   "name": "auto",
   "version": "1.0.0",
-  "description": "my automation k6 run --env ENV=prod register.js",
+  "description": "my k6 automation",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -14,10 +14,14 @@
     "url": "git+https://github.com/satriack/auto.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "chandra",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/satriack/auto/issues"
   },
-  "homepage": "https://github.com/satriack/auto#readme"
+  "homepage": "https://github.com/satriack/auto#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {}
 }
