@@ -30,4 +30,4 @@ jobs:
         env:
           SECRET: ${{ secrets.SECRET }}
         run: |
-          k6 run --env STAGE="$STAGE" --env SECRET="$SECRET" test.js
+          k6 run --env STAGE="$STAGE" test/regression/authentication/register.js
