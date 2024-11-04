@@ -1,0 +1,39 @@
+name: Run K6 Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      ENV:
+        description: 'Environment to use (prod or stg)'
+        required: true
+        default: 'stg'
+        type: choice
+        options:
+          - prod
+          - stg
+
+jobs:
+  k6_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set Environment Variable
+        id: set-env
+        run: |
+          echo "ENV=${{ github.event.inputs.ENV }}" >> $GITHUB_ENV
+
+      - name: Parse Secrets Based on ENV
+        env:
+          SECRET: ${{ secrets.SECRET }}
+          ENV: ${{ github.event.inputs.ENV }}
+        run: |
+          # Gunakan jq untuk memilih data dari SECRET berdasarkan ENV
+          echo "K6_USERNAME=$(echo $SECRET | jq -r .\"$ENV\".username)" >> $GITHUB_ENV
+          echo "K6_PASSWORD=$(echo $SECRET | jq -r .\"$ENV\".password)" >> $GITHUB_ENV
+
+      - name: Run K6 Test
+        run: |
+          k6 run --env ENV=$ENV --env K6_USERNAME=$K6_USERNAME --env K6_PASSWORD=$K6_PASSWORD test/regression/authentication/register.js
