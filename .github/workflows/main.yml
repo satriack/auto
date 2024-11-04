@@ -1,0 +1,33 @@
+name: Build and Test
+
+on:
+  # Menjalankan workflow secara manual dengan input
+  workflow_dispatch:
+    inputs:
+      STAGE:
+        description: 'Choose the stage (prod or stg)'
+        required: true
+        default: 'prod'
+        type: choice
+        options:
+          - prod
+          - stg
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set Environment Variables
+        id: set-env
+        run: |
+          echo "STAGE=${{ github.event.inputs.STAGE }}" >> $GITHUB_ENV
+
+      - name: Run K6 Test
+        env:
+          SECRET: ${{ secrets.SECRET }}
+        run: |
+          k6 run --env STAGE="$STAGE" --env SECRET="$SECRET" test.js
